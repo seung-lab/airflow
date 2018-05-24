@@ -21,7 +21,6 @@ from airflow.utils import db
 
 try:
     from airflow.hooks.docker_hook import DockerHook
-    from docker import Client
 except ImportError:
     pass
 
@@ -34,7 +33,7 @@ except ImportError:
         mock = None
 
 
-@mock.patch('airflow.hooks.docker_hook.Client', autospec=True)
+@mock.patch('airflow.hooks.docker_hook.APIClient', autospec=True)
 class DockerHookTest(unittest.TestCase):
     def setUp(self):
         configuration.load_test_config()
