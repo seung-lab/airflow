@@ -1489,12 +1489,14 @@ class SchedulerJob(BaseJob):
                         dagbag = models.DagBag(simple_dag.full_filepath)
                         dag = dagbag.get_dag(dag_id)
                         ti.task = dag.get_task(task_id)
+                        ti.try_number = ti.try_number + 1
                         ti.handle_failure(msg)
-                    except Exception:
+                    except Exception as e:
                         self.log.error("Cannot load the dag bag to handle failure for %s"
                                        ". Setting task to FAILED without callbacks or "
                                        "retries. Do you have enough resources?", ti)
-                        ti.state = State.FAILED
+                        self.log.exception(e)
+                        ti.state = State.UP_FOR_RETRY
                         session.merge(ti)
                         session.commit()
 
