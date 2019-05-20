@@ -14,7 +14,7 @@
 
 import json
 
-from slackclient import SlackClient
+from slack import WebClient
 from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 from airflow.exceptions import AirflowException
@@ -63,7 +63,7 @@ class SlackAPIOperator(BaseOperator):
         """
         if not self.api_params:
             self.construct_api_call_params()
-        sc = SlackClient(self.token)
+        sc = WebClient(self.token)
         rc = sc.api_call(self.method, **self.api_params)
         if not rc['ok']:
             msg = "Slack API call failed (%s)".format(rc['error'])
