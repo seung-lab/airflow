@@ -4142,7 +4142,7 @@ class Variable(Base, LoggingMixin):
     def set(cls, key, value, serialize_json=False, session=None):
 
         if serialize_json:
-            stored_value = json.dumps(value)
+            stored_value = json.dumps(value, indent=4)
         else:
             stored_value = value
 
