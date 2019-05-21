@@ -95,6 +95,29 @@ def checkout(dbapi_connection, connection_record, connection_proxy):
             "attempting to check out in pid {}".format(connection_record.info['pid'], pid)
         )
 
+def init_seuronbot():
+    from airflow import models
+    merge_conn(
+        models.Connection(
+            conn_id='AWS', conn_type='http',
+            host='aws_queue'))
+    merge_conn(
+        models.Connection(
+            conn_id='GCSConn', conn_type='google_cloud_platform',
+            schema='default',))
+    merge_conn(
+        models.Connection(
+            conn_id='InstanceGroup1', conn_type='http',
+            host='atomic-workers'))
+    merge_conn(
+        models.Connection(
+            conn_id='InstanceGroup2', conn_type='http',
+            host='composite-workers'))
+    merge_conn(
+        models.Connection(
+            conn_id='Slack', conn_type='http',
+            host='localhost'))
+
 
 def initdb():
     session = settings.Session()

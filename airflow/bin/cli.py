@@ -917,6 +917,10 @@ def initdb(args):  # noqa
     db_utils.initdb()
     print("Done.")
 
+def init_seuronbot(args):
+    print("DB: " + repr(settings.engine.url))
+    db_utils.init_seuronbot()
+    print("Done.")
 
 def resetdb(args):
     print("DB: " + repr(settings.engine.url))
@@ -1622,6 +1626,10 @@ class CLIFactory(object):
         }, {
             'func': initdb,
             'help': "Initialize the metadata database",
+            'args': tuple(),
+        }, {
+            'func': init_seuronbot,
+            'help': "Initialize the database for seuronbot",
             'args': tuple(),
         }, {
             'func': list_dags,
