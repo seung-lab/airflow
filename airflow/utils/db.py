@@ -100,7 +100,7 @@ def init_seuronbot():
     merge_conn(
         models.Connection(
             conn_id='AWS', conn_type='http',
-            host='aws_queue'))
+            host='aws_queue', login='default'))
     merge_conn(
         models.Connection(
             conn_id='GCSConn', conn_type='google_cloud_platform',
@@ -108,11 +108,11 @@ def init_seuronbot():
     merge_conn(
         models.Connection(
             conn_id='InstanceGroup1', conn_type='http',
-            host='atomic-workers'))
+            host='atomic-workers',login='default',extra='1000'))
     merge_conn(
         models.Connection(
             conn_id='InstanceGroup2', conn_type='http',
-            host='composite-workers'))
+            host='composite-workers',login='default', extra='1'))
     merge_conn(
         models.Connection(
             conn_id='Slack', conn_type='http',
