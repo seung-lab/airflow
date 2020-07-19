@@ -17,7 +17,7 @@ standard_library.install_aliases()
 from builtins import str
 from builtins import object
 
-from cgi import escape
+from html import escape
 from io import BytesIO as IO
 import functools
 import gzip
